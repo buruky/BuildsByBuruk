@@ -174,7 +174,6 @@ footer { font-size: .85rem; color: var(--muted); }
       <div class="line"><dt>Text</dt><dd id="phone">(206) 928-1358</dd><button class="copy" type="button" data-copy="phone">Copy</button></div>
       <div class="line"><dt>Email</dt><dd id="email">burukyimesgen@gmail.com</dd><button class="copy" type="button" data-copy="email">Copy</button></div>
       <div class="line"><dt>Website</dt><dd><a id="web" href="https://burukyimesgen.com" target="_blank" rel="noopener">burukyimesgen.com</a></dd><button class="copy" type="button" data-copy="web">Copy</button></div>
-      <div class="line"><dt>Facebook</dt><dd id="fb">builds.by.buruk</dd><button class="copy" type="button" data-copy="fb">Copy</button></div>
     </dl>
     <button class="share" type="button" id="copyAll">Copy my info to share</button>
     <p id="status" aria-live="polite"></p>
@@ -186,7 +185,7 @@ footer { font-size: .85rem; color: var(--muted); }
 <script>
 (function () {
   var status = document.getElementById('status');
-  var names = { phone: 'Number', email: 'Email', web: 'Website', fb: 'Username' };
+  var names = { phone: 'Number', email: 'Email', web: 'Website' };
   function selectText(el) {
     var r = document.createRange(); r.selectNodeContents(el);
     var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);

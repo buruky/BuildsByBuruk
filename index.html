@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Builds by Buruk</title>
+<title>Bk web studios</title>
 <meta name="description" content="Websites for small businesses, churches, and community groups. From $750.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Builds by Buruk">
+<meta property="og:title" content="Bk web studios">
 <meta property="og:description" content="Websites for small businesses, churches, and community groups. From $750.">
 <meta property="og:url" content="https://burukyimesgen.com/card/">
 <meta property="og:image" content="https://burukyimesgen.com/card/preview.jpg">
@@ -24,25 +24,34 @@
   --muted: #4a5652;
   --rule: #e2e6e3;
   --green: #1f4a3d;
+  --green-hi: #2f6b57;
   --on-green: #ffffff;
   --face: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --radius-lg: 20px;
+  --radius-sm: 12px;
+  --spring: cubic-bezier(.22, 1, .36, 1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #111614; --ink: #e8edeb; --muted: #9aa8a3; --rule: #26302d;
-    --green: #9ccfbd; --on-green: #10201a; color-scheme: dark;
+    --green: #9ccfbd; --green-hi: #c3e8da; --on-green: #10201a; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #111614; --ink: #e8edeb; --muted: #9aa8a3; --rule: #26302d;
-  --green: #9ccfbd; --on-green: #10201a; color-scheme: dark;
+  --green: #9ccfbd; --green-hi: #c3e8da; --on-green: #10201a; color-scheme: dark;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .001ms !important; animation: none !important; }
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; }
 img { max-width: 100%; }
 body {
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 20% -10%, color-mix(in srgb, var(--green) 14%, transparent), transparent 55%),
+    var(--paper);
   color: var(--ink);
   font-family: var(--face);
   font-size: 17px;
@@ -65,15 +74,22 @@ h1 {
 
 .actions { display: grid; gap: 10px; }
 .primary {
-  display: block; text-align: center; text-decoration: none;
-  background: var(--green); color: var(--on-green);
+  position: relative; display: block; text-align: center; text-decoration: none;
+  background: linear-gradient(165deg, var(--green-hi), var(--green) 60%);
+  color: var(--on-green);
   font-weight: 600; font-size: 1.2rem;
-  padding: 18px; border-radius: 6px;
-  box-shadow: 0 6px 16px -8px rgba(31, 74, 61, .55);
-  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  padding: 18px; border-radius: var(--radius-lg);
+  box-shadow: 0 10px 24px -10px rgba(31, 74, 61, .55), inset 0 1px 0 rgba(255, 255, 255, .35);
+  overflow: hidden;
+  transition: transform .4s var(--spring), box-shadow .4s var(--spring);
 }
-.primary:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(31, 74, 61, .6); }
-.primary:active { transform: translateY(0); box-shadow: 0 4px 10px -8px rgba(31, 74, 61, .5); }
+.primary::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .22), transparent 45%);
+  pointer-events: none;
+}
+.primary:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 14px 30px -10px rgba(31, 74, 61, .6), inset 0 1px 0 rgba(255, 255, 255, .35); }
+.primary:active { transform: scale(.97); box-shadow: 0 4px 10px -8px rgba(31, 74, 61, .5), inset 0 1px 0 rgba(255, 255, 255, .3); transition: transform .1s ease-out, box-shadow .1s ease-out; }
 .secondary { margin: 0; font-size: 1.1rem; color: var(--ink); text-align: center; }
 .secondary strong { font-size: 1.2rem; white-space: nowrap; }
 .secondary small { display: block; font-size: .9rem; color: var(--muted); }
@@ -85,21 +101,34 @@ p { margin: 0; }
 .muted { color: var(--muted); }
 
 figure { margin: 0; }
-.shot { display: block; border-radius: 6px; overflow: hidden; border: 1px solid var(--rule); transition: border-color .15s ease; }
-.shot:hover { border-color: var(--green); }
-.shot img { display: block; width: 100%; height: auto; max-width: 100%; transition: transform .25s ease; }
+.shot {
+  display: block; border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--rule);
+  box-shadow: 0 16px 36px -20px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .15);
+  transition: border-color .3s var(--spring), box-shadow .3s var(--spring), transform .3s var(--spring);
+}
+.shot:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 22px 44px -18px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .15); }
+.shot img { display: block; width: 100%; height: auto; max-width: 100%; transition: transform .4s var(--spring); }
 .shot:hover img { transform: scale(1.03); }
 figcaption { margin-top: 10px; font-size: .95rem; color: var(--muted); }
 figcaption a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
 
-.price { font-size: 2.6rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-bottom: 10px; color: var(--green); }
+.price {
+  font-size: 2.6rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-bottom: 10px;
+  background: linear-gradient(165deg, var(--green-hi), var(--green) 70%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
 
 .steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .steps li {
   display: grid; grid-template-columns: 44px 1fr; align-items: start; gap: 14px;
   padding-block: 16px; border-bottom: 1px solid var(--rule);
 }
-.steps .n { font-size: 2.2rem; font-weight: 800; line-height: 1; color: var(--green); letter-spacing: -.04em; }
+.steps .n {
+  font-size: 2.2rem; font-weight: 800; line-height: 1; letter-spacing: -.04em;
+  background: linear-gradient(165deg, var(--green-hi), var(--green) 70%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
 .steps div { min-width: 0; display: grid; gap: 2px; }
 .steps strong { font-size: 1.15rem; font-weight: 600; }
 .steps div span { color: var(--muted); }
@@ -115,8 +144,8 @@ dd a { color: inherit; text-decoration: none; }
 dd a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .copy {
   font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer;
-  background: none; border: 1px solid var(--rule); border-radius: 6px; padding: 6px 12px; color: var(--green);
-  transition: border-color .15s ease, transform .1s ease;
+  background: none; border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 6px 12px; color: var(--green);
+  transition: border-color .3s var(--spring), transform .1s ease-out;
 }
 .copy:hover { text-decoration: underline; text-underline-offset: 3px; border-color: var(--green); }
 .copy:active, .share:active { transform: scale(.97); }
@@ -124,8 +153,8 @@ dd a:hover { text-decoration: underline; text-underline-offset: 3px; }
   margin-top: 16px; width: 100%;
   font: inherit; font-weight: 600; font-size: .95rem; cursor: pointer;
   background: none; color: var(--ink);
-  border: 1px solid var(--rule); border-radius: 6px; padding: 12px;
-  transition: border-color .15s ease, transform .1s ease;
+  border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 12px;
+  transition: border-color .3s var(--spring), transform .1s ease-out;
 }
 .share:hover { border-color: var(--muted); }
 #status { margin-top: 10px; font-size: .9rem; color: var(--muted); min-height: 1.4em; }
@@ -137,7 +166,7 @@ footer { font-size: .85rem; color: var(--muted); }
 <body>
 <div class="page">
   <header>
-    <h1>Builds<br>by Buruk</h1>
+    <h1>Bk web<br>studios</h1>
     <p class="intro">I build websites for small businesses, churches, and community groups.</p>
   </header>
 
@@ -179,7 +208,7 @@ footer { font-size: .85rem; color: var(--muted); }
     <p id="status" aria-live="polite"></p>
   </div>
 
-  <footer>Builds by Buruk</footer>
+  <footer>Bk web studios</footer>
 </div>
 
 <script>
@@ -206,7 +235,7 @@ footer { font-size: .85rem; color: var(--muted); }
   });
   document.getElementById('copyAll').addEventListener('click', function () {
     copy([
-      'Builds by Buruk',
+      'Bk web studios',
       'Websites for small businesses, churches, and community groups. From $750.',
       'Message: https://m.me/builds.by.buruk',
       'Text: (206) 928-1358',
